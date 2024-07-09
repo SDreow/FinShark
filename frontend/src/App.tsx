@@ -5,6 +5,7 @@ import CardList from "./Components/CardList/CardList"; // Import komponenty pro 
 import Search from "./Components/Search/Search"; // Import vyhledávací komponenty
 import { CompanySearch } from "./company"; // Import typu pro vyhledávání společností
 import { searchCompanies } from "./api"; // Import funkce pro vyhledávání společností
+import ListPortfolio from "./Components/Portfolio/ListPortfolio/ListPortfolio";
 
 // Hlavní komponenta aplikace
 function App() {
@@ -12,6 +13,7 @@ function App() {
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchResults] = useState<CompanySearch[]>([]);
   const [serverError, setServerError] = useState<string>("");
+  const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
 
   // Funkce pro aktualizaci vyhledávacího řetězce podle uživatelského vstupu
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -19,9 +21,10 @@ function App() {
   };
 
   // Funkce pro vytvoření portfolia (zatím neimplementováno)
-  const onPortfolioCreate = async (e: SyntheticEvent) => {
+  const onPortfolioCreate = async (e: any) => {
     e.preventDefault();
-    console.log(e);
+    const updatedPortfolio = [...portfolioValues, e.target[0].value];
+    setPortfolioValues(updatedPortfolio);
   };
 
   // Funkce pro zpracování kliknutí na tlačítko vyhledávání
@@ -40,6 +43,7 @@ function App() {
   return (
     <div className="App">
       <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
+      <ListPortfolio portfolioValues={portfolioValues}/>
       <CardList searchResults={searchResults} onPortfolioCreate={onPortfolioCreate} />
       {serverError && <h1>{serverError}</h1>}
     </div>
