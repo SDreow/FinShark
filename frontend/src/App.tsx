@@ -21,19 +21,31 @@ function App() {
   };
 
   // Funkce pro vytvoření portfolia (zatím neimplementováno)
-  const onPortfolioCreate = async (e: any) => {
+  const onPortfolioCreate = (e: any) => {
     e.preventDefault();
+    const exist = portfolioValues.find((value) => value === e.target[0].value);
+    if (exist) return;
     const updatedPortfolio = [...portfolioValues, e.target[0].value];
     setPortfolioValues(updatedPortfolio);
+  };
+
+  const onPortfolioDelete = (e: any) => {
+    e.preventDefalut()
+    const removed = portfolioValues.filter((value) => {
+      return value !== e.target[0].value;
+    });
+    setPortfolioValues(removed);
   };
 
   // Funkce pro zpracování kliknutí na tlačítko vyhledávání
   const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault(); // Zamezení výchozího chování formuláře
     const result = await searchCompanies(search); // Vyvolání vyhledávání
-    if (typeof result === "string") { // Zpracování chybové zprávy
+    if (typeof result === "string") {
+      // Zpracování chybové zprávy
       setServerError(result);
-    } else if (Array.isArray(result.data)) { // Zpracování úspěšně načtených dat
+    } else if (Array.isArray(result.data)) {
+      // Zpracování úspěšně načtených dat
       setSearchResults(result.data);
     }
     console.log(searchResults); // Logování výsledků (pro ladění)
@@ -42,9 +54,19 @@ function App() {
   // Vykreslení komponenty
   return (
     <div className="App">
-      <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
-      <ListPortfolio portfolioValues={portfolioValues}/>
-      <CardList searchResults={searchResults} onPortfolioCreate={onPortfolioCreate} />
+      <Search
+        onSearchSubmit={onSearchSubmit}
+        search={search}
+        handleSearchChange={handleSearchChange}
+      />
+      <ListPortfolio
+        portfolioValues={portfolioValues}
+        onPortfolioDelete={onPortfolioDelete}
+      />
+      <CardList
+        searchResults={searchResults}
+        onPortfolioCreate={onPortfolioCreate}
+      />
       {serverError && <h1>{serverError}</h1>}
     </div>
   );
