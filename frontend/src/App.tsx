@@ -6,6 +6,8 @@ import Search from "./Components/Search/Search"; // Import vyhledávací kompone
 import { CompanySearch } from "./company"; // Import typu pro vyhledávání společností
 import { searchCompanies } from "./api"; // Import funkce pro vyhledávání společností
 import ListPortfolio from "./Components/Portfolio/ListPortfolio/ListPortfolio";
+import Navbar from "./Components/Navbar/Navbar";
+import Hero from "./Components/Hero/Hero";
 
 // Hlavní komponenta aplikace
 function App() {
@@ -30,7 +32,7 @@ function App() {
   };
 
   const onPortfolioDelete = (e: any) => {
-    e.preventDefalut()
+    e.preventDefault();
     const removed = portfolioValues.filter((value) => {
       return value !== e.target[0].value;
     });
@@ -54,6 +56,7 @@ function App() {
   // Vykreslení komponenty
   return (
     <div className="App">
+      <Navbar />
       <Search
         onSearchSubmit={onSearchSubmit}
         search={search}
