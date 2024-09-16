@@ -3,6 +3,7 @@ import React from "react"; // Import Reactu pro vytváření komponent
 import "./Card.css"; // Import CSS stylů pro tuto komponentu
 import { CompanySearch } from "../../company"; // Import typu CompanySearch pro práci s daty společností
 import AddPortfolio from "../Portfolio/AddPortfolio/AddPortfolio"; // Import komponenty AddPortfolio
+import { Link } from "react-router-dom";
 
 // Definice rozhraní pro props přijímané komponentou Card
 interface Props {
@@ -12,7 +13,11 @@ interface Props {
 }
 
 // Komponenta Card pro zobrazení informací o společnosti
-const Card: React.FC<Props> = ({ id, searchResult, onPortfolioCreate}: Props): JSX.Element => {
+const Card: React.FC<Props> = ({
+  id,
+  searchResult,
+  onPortfolioCreate,
+}: Props): JSX.Element => {
   // Vykreslení komponenty
   return (
     <div
@@ -20,9 +25,12 @@ const Card: React.FC<Props> = ({ id, searchResult, onPortfolioCreate}: Props): J
       key={id}
       id={id}
     >
-      <h2 className="font-bold text-center text-black md:text-left">
+      <Link
+        to={`/company/${searchResult.symbol}`}
+        className="font-bold text-center text-black md:text-left"
+      >
         {searchResult.name} ({searchResult.symbol})
-      </h2>
+      </Link>
       <p className="text-black">{searchResult.currency}</p>
       <p className="font-bold text-black">
         {searchResult.exchangeShortName} - {searchResult.stockExchange}
