@@ -4,61 +4,75 @@ import { useOutletContext } from "react-router";
 import { getBalanceSheet } from "../../api";
 import RatioList from "../RatioList/RatioList";
 import Spinner from "../Spinner/Spinner";
+import { formatLargeMonetaryNumber } from "../../Helpers/NumberFormating";
 
 type Props = {};
 
 const config = [
   {
     Label: <div className="font-bold">Total Assets</div>,
-    render: (company: CompanyBalanceSheet) => company.totalAssets,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.totalAssets),
   },
   {
     Label: "Current Assets",
-    render: (company: CompanyBalanceSheet) => company.totalCurrentAssets,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.totalCurrentAssets),
   },
   {
     Label: "Total Cash",
-    render: (company: CompanyBalanceSheet) => company.cashAndCashEquivalents,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.cashAndCashEquivalents),
   },
   {
     Label: "Property & equipment",
-    render: (company: CompanyBalanceSheet) => company.propertyPlantEquipmentNet,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.propertyPlantEquipmentNet),
   },
   {
     Label: "Intangible Assets",
-    render: (company: CompanyBalanceSheet) => company.intangibleAssets,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.intangibleAssets),
   },
   {
     Label: "Long Term Debt",
-    render: (company: CompanyBalanceSheet) => company.longTermDebt,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.longTermDebt),
   },
   {
     Label: "Total Debt",
-    render: (company: CompanyBalanceSheet) => company.otherCurrentLiabilities,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.otherCurrentLiabilities),
   },
   {
     Label: <div className="font-bold">Total Liabilites</div>,
-    render: (company: CompanyBalanceSheet) => company.totalLiabilities,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.totalLiabilities),
   },
   {
     Label: "Current Liabilities",
-    render: (company: CompanyBalanceSheet) => company.totalCurrentLiabilities,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.totalCurrentLiabilities),
   },
   {
     Label: "Long-Term Debt",
-    render: (company: CompanyBalanceSheet) => company.longTermDebt,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.longTermDebt),
   },
   {
     Label: "Long-Term Income Taxes",
-    render: (company: CompanyBalanceSheet) => company.otherLiabilities,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.otherLiabilities),
   },
   {
     Label: "Stakeholder's Equity",
-    render: (company: CompanyBalanceSheet) => company.totalStockholdersEquity,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.totalStockholdersEquity),
   },
   {
     Label: "Retained Earnings",
-    render: (company: CompanyBalanceSheet) => company.retainedEarnings,
+    render: (company: CompanyBalanceSheet) =>
+      formatLargeMonetaryNumber(company.retainedEarnings),
   },
 ];
 
